@@ -4,7 +4,7 @@ A simple Python script designed to review word documents (.docx and
 .doc) and PDF files to identify any words that might be objectionable
 to NIH policies.
 
-The list of words is taken from a list pf NIH [disfavoured
+The list of words is taken from a list of NIH [disfavoured
 words](https://www.nature.com/magazine-assets/d41586-026-01924-8/52836226),
 as published in a June 26, 2026 [news article in
 _Nature_](https://www.nature.com/articles/d41586-026-01924-8).
