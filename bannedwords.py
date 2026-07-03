@@ -20,7 +20,7 @@ def search_word_paras(paras: list, word: str) -> list:
     """
     results = []
     for i in range(len(paras)):
-        if word in paras[i]:
+        if word.lower() in paras[i]:
             results.append((i,paras[i]))
     return results
 
@@ -35,7 +35,7 @@ def get_word_paras(d:Document) -> list:
         list: List of paragraphs from the document.
     """
     paras = [p.text for p in d.paragraphs]
-    paras = [p for p in paras if len(p) > 0]
+    paras = [p.lower() for p in paras if len(p) > 0]
     return paras
 
 def search_doc_word(d: Document, word: str) -> list:
@@ -85,10 +85,13 @@ def read_pdfs(directory: str) -> list:
 def check_files(docs: list, pdfs: list, categories: dict) -> dict:
     res = {}
     for d in docs:
-        doc = Document(d)
-        r = search_doc_for_categories(doc,categories)
-        if len(r)>0:
-            res[d]  = r
+        try :
+            doc = Document(d)
+            r = search_doc_for_categories(doc,categories)
+            if len(r)>0:
+                res[d]  = r
+        except:
+            print("unable to process..."+d)
 
     for p in pdfs: 
         ps = search_pdf_for_categories(p,categories)
@@ -102,6 +105,7 @@ def main():
     parser = argparse.ArgumentParser(description='Search for banned words in NIH proposal content.')
     parser.add_argument('--category-file', help='Path to the category JSON file')
     parser.add_argument('--directory', help='Path to the directory containing documents to search')
+    parser.add_argument('--file',help='Single file to process')
     args = parser.parse_args()
 
     # 1. read in the json
@@ -111,16 +115,23 @@ def main():
         print("Please provide a  JSON file with the banned categoriesusing --category-file")
         return
     
-    if args.directory is None:
-        print("Please provide a directory containing documents to search using --directory")
+    if args.directory is None and args.file is None:
+        print("Please provide a directory containing documents to search using --directory or a file to process using --file")
         return
     with open(args.category_file, 'r') as f:
         categories = json.load(f)
-    
-    docs = read_docs(args.directory)
-    pdfs = read_pdfs(args.directory)
 
-    results = check_files(docs,pdfs,categories)
+    if args.directory is not None:
+        docs = read_docs(args.directory)
+        pdfs = read_pdfs(args.directory)
+        results = check_files(docs,pdfs,categories)
+    else:
+        results = {}
+        if args.file.endswith('.pdf'):
+            results[args.file] = search_pdf_for_categories(args.file,categories)
+        else:
+            doc = Document(args.file)
+            results[args.file] = search_doc_for_categories(doc,categories)
     print (json.dumps(results, indent=4))
 
 

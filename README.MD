@@ -4,10 +4,15 @@ A simple Python script designed to review word documents (.docx and
 .doc) and PDF files to identify any words that might be objectionable
 to NIH policies.
 
-The list of words is taken from a list pf NIH [disfavoured
+The list of words is taken primarily from two sources:
+
+* a list pf NIH [disfavoured
 words](https://www.nature.com/magazine-assets/d41586-026-01924-8/52836226),
 as published in a June 26, 2026 [news article in
 _Nature_](https://www.nature.com/articles/d41586-026-01924-8).
+* an earlier list of words from a March 27, 2026 NY Times article [These Words Are Disappearing in the New Trump Administration](https://www.nytimes.com/interactive/2025/03/07/us/trump-federal-agencies-websites-words-dei.html).
+
+Additional words in a similar spirit have been added as deemed appropriate.
 
 # Installation
 
