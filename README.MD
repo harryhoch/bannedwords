@@ -18,8 +18,8 @@ Additional words in a similar spirit have been added as deemed appropriate.
 Requires a modern version of Python (I ran it on Python 3.14), with
 two additional libraries:
 
-* (pdfplumber 0.11.10](https://pypi.org/project/pdfplumber/)
-* (python-docx 1.2.0 )[https://pypi.org/project/python-docx/))
+* [pdfplumber 0.11.10](https://pypi.org/project/pdfplumber/)
+* [python-docx 1.2.0](https://pypi.org/project/python-docx/)
 
 See also the included `requirements.txt` for details.
 
@@ -61,3 +61,7 @@ file). Some words have been added to avoid possible false
 negatives. For example, although `workforce diversification` was
 included in the published file, `diversification` was not. The
 `categories.json` file can be adapted as needed. 
+
+# A note on specificity
+
+The list of words flagged is very broad (by design) and quite likely to lead to false positives. Future enhancements might include a "whitelist" overriding certain terms in the list.
