@@ -26,8 +26,20 @@ See also the included `requirements.txt` for details.
 # Usage
 
 ```
-bannedwords --category_file <file> --directory <directory>
+Bannedwords --category_file <file> --directory <directory>
 ```
+
+or
+
+```
+Bannedwords --category_file <file> --file <file>
+```
+
+optional argument:
+
+```
+--whitelist <whitelist.json>
+
 
 where
 
@@ -35,6 +47,8 @@ where
   format described below
 * 'directory` is the directory containing the files to be scanned. All
   .doc, .docx, and .pdf files in that directory will be reviewed.
+* `file` is a single to be processed.
+* `whitelist` is a json file containing words to be whitelisted. Details given below
 
 # Output
 
@@ -60,8 +74,28 @@ published by Nature on June 26, 2026 (included in the bannedwords.pdf
 file). Some words have been added to avoid possible false
 negatives. For example, although `workforce diversification` was
 included in the published file, `diversification` was not. The
-`categories.json` file can be adapted as needed. 
+`categories.json` file can be adapted as needed.
 
-# A note on specificity
 
-The list of words flagged is very broad (by design) and quite likely to lead to false positives. Future enhancements might include a "whitelist" overriding certain terms in the list.
+# Whitelist
+
+The whitelist file provides some limited relief for false positives.
+This file contains a list of words that have banned words as
+prefixes. If all of the instances of a banned word in a given passage
+match whitelisted words, those instances of the banned word won't be
+included in the report.
+
+For example, if "trans" is banned, a sentence containing
+"translational", "transducation", and "transformer" will not be
+flagged.
+
+Note that this functionality extends only to prefixes. As currently
+implemented, a ban on "orientation" cannot be whitelisted to allow for
+"first-year orientation", as the banned term does not occur at the
+start of the whitelisted term. Perhaps in a future iteration.
+
+# Disclaimers
+
+No gurantees are made as to the accuracy or the comprehensiveness of
+the searches. No promises are made as to the possibility of your text
+being flagged by NIH.
