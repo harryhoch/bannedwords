@@ -197,7 +197,7 @@ def main():
     # 2. read in docs and pdfs.
     # routine to do all of them together...
     if args.category_file is None:
-        print("Please provide a  JSON file with the banned categoriesusing --category-file")
+        print("Please provide a  JSON file with the banned categories using --category-file")
         return
     
     if not os.path.isfile(args.category_file):
