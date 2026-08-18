@@ -187,7 +187,7 @@ def check_files(docs: list, pdfs: list, categories: dict,whitelist: list) -> dic
 def main():
     # get args
     parser = argparse.ArgumentParser(description='Search for banned words in NIH proposal content.')
-    parser.add_argument('--category-file', help='Path to the category JSON file')
+    parser.add_argument('--category_file', help='Path to the category JSON file')
     parser.add_argument('--directory', help='Path to the directory containing documents to search')
     parser.add_argument('--file',help='Single file to process')
     parser.add_argument('--whitelist',help='Whitelist file containing words that should be explicitly included')
